@@ -3,70 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>signup</title>
+    <title>Signup</title>
     <style>
-        form{
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
-            /* align-items: center; */
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            display: flex;
             flex-direction: column;
-            gap: 10px;
-            width: 90vw;
-            height: 80vh;
+            gap: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input {
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <form action="/auth/signup" method="post">
-        <label for="name">name </label>
-        <input type="text" name="name" id="name">
-        <label for="email">email </label>
-        <input type="text" name="email" id="email">
-        <label for="dob">DOB </label>
-        <input type="date" name="dob" id="dob">
-        <label for="password">password</label>
-        <input type="password" name="password" id="password">
-        <label for="confirmPassword">confirmPassword</label>
-        <input type="password" name="confirmPassword" id="confirmPassword">
-        <select name="role" id="roles">
-            <option value="--select role--">--select role--</option>
-            <option value="student">student</option>
-            <option value="faculty">faculty</option>
-            <option value="admin">admin</option>
-        </select>
-        <div class="student-fields">
-            <label for="roll_no">roll no</label>
-            <input type="text" name="roll_no" id="roll_no">
-            <label for="branch">branch</label>
-            <select name="branch">
-                <option value="" selected>--branch--</option>
-                <option value="cse">cse</option>
-                <option value="ee">ee</option>
-                <option value="me">me</option>
-                <option value="ce">ce</option>
-            </select>
-            <label for="year">year</label>
-            <select name="year">
-                <option value="" selected>--year--</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
+        <h2>Signup</h2>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="Enter your name">
         </div>
-        <button type="submit">submit</button>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Enter your password">
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm your password">
+        </div>
+        <button type="submit">Submit</button>
     </form>
-
-    <script>
-        let roles = document.querySelector('#roles');
-        let student_fields = document.querySelector('.student-fields');
-
-        student_fields.style.display = 'none';
-
-        roles.addEventListener('change', (e)=>{
-            if(roles.value=='student') student_fields.style.display = 'block';
-            else student_fields.style.display = 'none';
-        })
-    </script>
 </body>
 </html>

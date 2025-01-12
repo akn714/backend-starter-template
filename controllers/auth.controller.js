@@ -34,7 +34,7 @@ async function validateUserData(role, data) {
         !data.confirmPassword
       ) return [false, "An error occurred!"];
 
-      const user = await studentModel.findOne({
+      const user = await Model.findOne({
         $or: [
           { [USER_KEYS.email]: data.email }
         ]
@@ -52,7 +52,7 @@ async function validateUserData(role, data) {
         !data.confirmPassword
       ) return [false, "An error occurred!"];
 
-      const user = await studentModel.findOne({
+      const user = await Model.findOne({
         $or: [
           { [USER_KEYS.email]: data.email }
         ]
@@ -85,7 +85,7 @@ module.exports = {
 
   async signup(req, res) {
     try {
-      const { role } = req.body;
+      const role = ROLES.USER; // (update) you can provide roles from req.body
       if (!role) return res.json({ message: "Role is required!" });
 
       const userData = role === ROLES.ADMIN
@@ -105,7 +105,7 @@ module.exports = {
       const [isValid, validationMessage] = await validateUserData(role, userData);
       if (!isValid) return res.json({ message: validationMessage });
 
-      const model = role === ROLES.ADMIN ? Model : Model; // you can add an admin model also
+      const model = role === ROLES.ADMIN ? Model : Model; // (update) you can add an admin model also
       const user = await model.create(userData);
       if (user) {
         const token = jwt.sign({ payload: user["_id"] }, JWT_KEY);
@@ -141,7 +141,7 @@ module.exports = {
         [USER_KEYS.EMAIL]: email
       };
 
-      const model = role === ROLES.ADMIN ? Model : Model; // you can also add admin model
+      const model = role === ROLES.ADMIN ? Model : Model; // (update) you can also add admin model
       const user = await model.findOne(query);
       if (!user) return res.status(404).json({ message: MESSAGE.UserNotFound });
 

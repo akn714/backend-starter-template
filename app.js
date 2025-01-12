@@ -13,6 +13,7 @@ const app = express();
 
 // Mini apps
 const routes = require('./routes/routes');
+const auth_routes = require('./routes/auth.routes');
 
 // Middleware for authentication
 const { is_user_authentic } = require('./controllers/controller');
@@ -26,6 +27,7 @@ app.set('views', path.join(__dirname, 'views')); // Set views directory
 
 // Routes for mini apps
 app.use('/routes', routes);
+app.use('/auth', auth_routes);
 
 // Route for unauthorized users
 app.get('/unauthorized', (req, res) => {
@@ -38,9 +40,7 @@ app.get('/unauthorized', (req, res) => {
 // Home route
 app.get('/', (req, res) => {
     try {
-        return res.status(200).json({
-            message: '# Home Route #'
-        })
+        res.status(404).sendFile(path.join(__dirname, '/views/html/home.html'));
     } catch (error) {
         console.error('[-] Error in home route:', error.message);
         res.status(500).json({
