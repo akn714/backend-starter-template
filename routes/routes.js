@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/public-route', controller.public_route);
 
 // Private routes
-// router.use(controller.authorize_user); // Middleware for authentication (applied to every private route)
+router.use(controller.authorize_user); // Middleware for authentication (applied to every private route)
 router.get('/private-route', controller.private_route);
 
 router.use((req, res) => {
